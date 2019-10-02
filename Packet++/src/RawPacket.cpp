@@ -14,6 +14,8 @@ void RawPacket::Init()
 	m_DeleteRawDataAtDestructor = true;
 	m_RawPacketSet = false;
 	m_linkLayerType = LINKTYPE_ETHERNET;
+	m_Interface = 0;
+	m_Flags = 0;
 }
 
 RawPacket::RawPacket(const uint8_t* pRawData, int rawDataLen, timeval timestamp, bool deleteRawDataAtDestructor, LinkLayerType layerType)
@@ -101,7 +103,7 @@ const uint8_t* RawPacket::getRawDataReadOnly() const
 {
 	return m_pRawData;
 }
-		
+
 LinkLayerType RawPacket::getLinkLayerType() const
 {
 	return m_linkLayerType;

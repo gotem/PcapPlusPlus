@@ -55,6 +55,7 @@ typedef struct _light_packet_header {
 	uint16_t data_link;
 	char* comment;
 	uint16_t comment_length;
+	uint32_t flags;
 } light_packet_header;
 
 typedef struct _light_pcapng_file_info {

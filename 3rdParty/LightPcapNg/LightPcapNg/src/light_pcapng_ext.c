@@ -421,6 +421,12 @@ int light_get_next_packet(light_pcapng_t *pcapng, light_packet_header *packet_he
 		packet_header->comment_length = light_get_option_length(option);
 		packet_header->comment = (char*)light_get_option_data(option);
 	}
+	option = light_get_option(pcapng->pcapng_iter, 2); // get flags
+	packet_header->flags = 0;
+	if (option != NULL && light_get_option_length(option) == 4)
+	{	
+		packet_header->flags = *(uint32_t*)light_get_option_data(option);
+	}
 
 	pcapng->pcapng_iter = light_next_block(pcapng->pcapng_iter);
 

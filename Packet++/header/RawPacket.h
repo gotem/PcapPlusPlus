@@ -226,6 +226,8 @@ namespace pcpp
 		bool m_DeleteRawDataAtDestructor;
 		bool m_RawPacketSet;
 		LinkLayerType m_linkLayerType;
+		uint32_t m_Flags;
+		uint32_t m_Interface;
 		void Init();
 		void copyDataFrom(const RawPacket& other, bool allocateData = true);
 	public:
@@ -282,11 +284,15 @@ namespace pcpp
 		 * @param[in] rawDataLen The new raw data length in bytes
 		 * @param[in] timestamp The timestamp packet was received by the NIC
 		 * @param[in] layerType The link layer type for this raw data
-		 * @param[in] frameLength When reading from pcap files, sometimes the captured length is different from the actual packet length. This parameter represents the packet 
+		 * @param[in] frameLength When reading from pcap files, sometimes the captured length is different from the actual packet length. This parameter represents the packet
 		 * length. This parameter is optional, if not set or set to -1 it is assumed both lengths are equal
 		 * @return True if raw data was set successfully, false otherwise
 		 */
 		virtual bool setRawData(const uint8_t* pRawData, int rawDataLen, timeval timestamp, LinkLayerType layerType = LINKTYPE_ETHERNET, int frameLength = -1);
+
+		inline void setFlags(uint32_t flags) { m_Flags = flags; }
+
+		inline void setInterface(uint32_t interface) { m_Interface = interface; }
 
 		/**
 		 * Get raw data pointer
@@ -323,6 +329,9 @@ namespace pcpp
 		 */
 		timeval getPacketTimeStamp();
 
+		inline uint32_t getFlags() { return m_Flags;}
+
+		inline uint32_t getInterface() { return m_Interface; }
 		/**
 		 * Get an indication whether raw data was already set for this instance.
 		 * @return True if raw data was set for this instance. Raw data can be set using the non-default constructor, using setRawData(), using

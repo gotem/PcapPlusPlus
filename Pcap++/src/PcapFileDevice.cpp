@@ -293,6 +293,8 @@ bool PcapNgFileReaderDevice::getNextPacket(RawPacket& rawPacket, std::string& pa
 		LOG_ERROR("Couldn't set data to raw packet");
 		return false;
 	}
+	rawPacket.setFlags(pktHeader.flags);
+	rawPacket.setInterface(pktHeader.interface_id);
 
 	if (pktHeader.comment != NULL && pktHeader.comment_length > 0)
 		packetComment = std::string(pktHeader.comment, pktHeader.comment_length);
